@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: booora/fastapi-ml-dev:{{ github.sha }}
+          tags: booora/fastapi-ml-dev:${{ github.sha }}
           context: "."
           file: ./Dockerfile
 
