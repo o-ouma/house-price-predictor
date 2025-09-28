@@ -1,0 +1,22 @@
+services:
+  fastapi:
+    image: booora/fastapi-ml:dev
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: fastapi_container
+    ports:
+      - "8000:8000"
+    restart: always
+
+  streamlit:
+    image: booora/streamlit:dev
+    build:
+        context: ./streamlit_app
+        dockerfile: Dockerfile
+    container_name: streamlit_container
+    restart: always
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://fastapi_container:8000/
