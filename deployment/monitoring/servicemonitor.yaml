@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: house-price-api-monitor
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: model-api
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: "8000"
+      path: /metrics
+      interval: 15s
+
+{
+  "title": "ML Model API - Observability Dashboard",
+  "timezone": "browser",
+  "refresh": "10s",
+  "schemaVersion": 30,
+  "version": 1,
+  "panels": [
+    {
+      "expr": "sum(rate(http_requests_total[1m])) by (handler)",
+      "legendFormat": "{{handler}}",
+      "refId": "A"
+    }
+  ],
+  "datasource": "Prometheus",
+  "gridPos": {
+
+  }
+}
