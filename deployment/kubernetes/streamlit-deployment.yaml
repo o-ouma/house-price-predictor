@@ -21,7 +21,7 @@ spec:
       - image: booora/streamlit:dev
         name: streamlit
         env:
-          name: API_URL
+        - name: API_URL
           value: "http://model-api:8000"
         ports:
         - containerPort: 8501
