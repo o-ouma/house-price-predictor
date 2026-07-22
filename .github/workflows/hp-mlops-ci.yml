@@ -98,6 +98,16 @@ jobs:
             curl -f http://localhost:5000/health || sleep 5;
           done
 
+      - name: Debug MLflow Env
+        run: |
+          if [ -z "$MLFLOW_TRACKING_USERNAME" ]; then
+            echo "MLFLOW_TRACKING_USERNAME is EMPTY!"
+          else
+            echo "MLFLOW_TRACKING_USERNAME is set."
+          fi
+        env:
+          MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+
       - name: Train Model
         env:
           MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
