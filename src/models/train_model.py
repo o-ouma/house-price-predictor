@@ -57,7 +57,21 @@ def main(args):
 
     if args.mlflow_tracking_uri:
         mlflow.set_tracking_uri(args.mlflow_tracking_uri)
-        mlflow.set_experiment(model_cfg['name'])
+
+        # Create experiment with an explicit local artifact location
+        experiment_name = "house_price_model"
+        artifact_location = "/mlflow/artifacts"
+
+        experiment = mlflow.get_experiment_by_name(experiment_name)
+        if experiment is None:
+            mlflow.create_experiment(
+                name=experiment_name,
+                artifact_location=artifact_location
+            )
+
+        mlflow.set_experiment(experiment_name)
+
+        # mlflow.set_experiment(model_cfg['name'])
 
     # Load data
     data = pd.read_csv(args.data)
