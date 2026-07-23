@@ -59,7 +59,7 @@ def main(args):
         mlflow.set_tracking_uri(args.mlflow_tracking_uri)
 
         # Create experiment with an explicit local artifact location
-        experiment_name = "house_price_model"
+        experiment_name = "house_price_model_demo"
         artifact_location = "/mlflow/artifacts"
 
         experiment = mlflow.get_experiment_by_name(experiment_name)
